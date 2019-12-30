@@ -1,12 +1,5 @@
 package ru.spbgasu.annaaalexeevna;
 
-import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Chat;
-import org.telegram.telegrambots.meta.api.objects.User;
-import org.telegram.telegrambots.meta.bots.AbsSender;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,7 +36,6 @@ public class ClassOfArrayLists {
                     currentTask.getListNumber() == list &&
                     currentTask.getTaskNumber() == task) {
                 arrayOfTasks.remove(currentTask);
-                restoreNumberTask(currentTask.getTaskNumber(), arrayOfTasks.size(), arrayOfTasks);
             }
         }
     }
@@ -53,7 +45,6 @@ public class ClassOfArrayLists {
             if (currentList.getGroupNumber() == group &&
                     currentList.getTaskListNumber() == list) {
                 arrayOfTaskLists.remove(currentList);
-                restoreNumberTaskList(currentList.getTaskListNumber(), arrayOfTaskLists.size(), arrayOfTaskLists);
             }
         }
         for (Task currentTask : arrayOfTasks) {
@@ -71,7 +62,6 @@ public class ClassOfArrayLists {
         for (GroupOfTask currentGroup : arrayGroupOfTasks) {
             if (currentGroup.getGroupNumber() == group) {
                 arrayGroupOfTasks.remove(currentGroup);
-                restoreNumberGroupOfTask(currentGroup.getGroupNumber(), arrayOfTasks.size(), arrayGroupOfTasks);
             }
         }
         for (TaskList currentList : arrayOfTaskLists) {
@@ -175,21 +165,27 @@ public class ClassOfArrayLists {
         }
     }
 
-    public void restoreNumberTask(int numberStart, int numberLast, List<Task> arrayOfTasks) {
-        for (int i = numberStart + 1; i < numberLast; i++) {
-            arrayOfTasks.get(i).setTaskNumber(arrayOfTasks.get(i).getTaskNumber() - 1);
-        }
-    }
-
-    public void restoreNumberTaskList(int numberStart, int numberLast, List<TaskList> arrayOfTaskLists) {
-        for (int i = numberStart + 1; i < numberLast; i++) {
-            arrayOfTaskLists.get(i).setTaskListNumber(arrayOfTaskLists.get(i).getTaskListNumber() - 1);
-        }
-    }
-
-    public void restoreNumberGroupOfTask(int numberStart, int numberLast, List<GroupOfTask> arrayGroupOfTasks) {
-        for (int i = numberStart + 1; i < numberLast; i++) {
-            arrayGroupOfTasks.get(i).setGroupNumber(arrayGroupOfTasks.get(i).getGroupNumber() - 1);
-        }
+    public static <T> int nextIndex(List<T> arrayOfElements) {
+        return arrayOfElements.size() + 1;
     }
 }
+
+//    public void restoreNumberTask(int numberStart, int numberLast, List<Task> arrayOfTasks) {
+//        for (int i = numberStart + 1; i < numberLast; i++) {
+//            arrayOfTasks.get(i).setTaskNumber(arrayOfTasks.get(i).getTaskNumber() - 1);
+//        }
+//    }
+//
+//    public void restoreNumberTaskList(int numberStart, int numberLast, List<TaskList> arrayOfTaskLists) {
+//        for (int i = numberStart + 1; i < numberLast; i++) {
+//            arrayOfTaskLists.get(i).setTaskListNumber(arrayOfTaskLists.get(i).getTaskListNumber() - 1);
+//        }
+//    }
+//
+//    public void restoreNumberGroupOfTask(int numberStart, int numberLast, List<GroupOfTask> arrayGroupOfTasks) {
+//        for (int i = numberStart + 1; i < numberLast; i++) {
+//            arrayGroupOfTasks.get(i).setGroupNumber(arrayGroupOfTasks.get(i).getGroupNumber() - 1);
+//        }
+//    }
+
+

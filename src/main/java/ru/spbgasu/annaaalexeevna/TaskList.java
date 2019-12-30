@@ -1,8 +1,5 @@
 package ru.spbgasu.annaaalexeevna;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TaskList {
     private int taskListNumber;
     private String nameTaskList;
