@@ -3,15 +3,15 @@ package ru.spbgasu.annaaalexeevna;
 import java.util.ArrayList;
 
 public class GroupOfTask {
-    private  Integer groupNumber;
+    private  int groupNumber;
     private String nameGroup;
 
-    public GroupOfTask (Integer groupNumber,String nameGroup) {
+    public GroupOfTask (int groupNumber,String nameGroup) {
         this.groupNumber = groupNumber;
         this.nameGroup = nameGroup;
     }
 
-    public void setGroupNumber(Integer groupNumber) {
+    public void setGroupNumber(int groupNumber) {
 
         this.groupNumber = groupNumber;
     }
@@ -21,7 +21,7 @@ public class GroupOfTask {
         this.nameGroup = nameGroup;
     }
 
-    Integer getGroupNumber() {
+    int getGroupNumber() {
         return groupNumber;
     }
 

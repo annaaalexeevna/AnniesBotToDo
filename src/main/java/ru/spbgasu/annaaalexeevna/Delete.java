@@ -89,19 +89,19 @@ public class Delete extends BotCommand {
         }
     }
 
-    public void restoreNumberTask(Integer numberStart, Integer numberLast, ArrayList<Task> arrayOfTasks) {
+    public void restoreNumberTask(int numberStart, int numberLast, ArrayList<Task> arrayOfTasks) {
         for (int i = numberStart + 1; i < numberLast; i++) {
             arrayOfTasks.get(i).setTaskNumber(arrayOfTasks.get(i).getTaskNumber() - 1);
         }
     }
 
-    public void restoreNumberTaskList(Integer numberStart, Integer numberLast, ArrayList<TaskList> arrayOfTaskLists) {
+    public void restoreNumberTaskList(int numberStart, int numberLast, ArrayList<TaskList> arrayOfTaskLists) {
         for (int i = numberStart + 1; i < numberLast; i++) {
             arrayOfTaskLists.get(i).setTaskListNumber(arrayOfTaskLists.get(i).getTaskListNumber() - 1);
         }
     }
 
-    public void restoreNumberGroupOfTask(Integer numberStart, Integer numberLast, ArrayList<GroupOfTask> arrayGroupOfTasks) {
+    public void restoreNumberGroupOfTask(int numberStart, int numberLast, ArrayList<GroupOfTask> arrayGroupOfTasks) {
         for (int i = numberStart + 1; i < numberLast; i++) {
             arrayGroupOfTasks.get(i).setGroupNumber(arrayGroupOfTasks.get(i).getGroupNumber() - 1);
         }
