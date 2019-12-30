@@ -7,48 +7,25 @@ import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+
 
 public class Show extends BotCommand {
 
-    ArrayList<Task> arrayOfTasks;
-    ArrayList<TaskList> arrayOfTaskLists;
-    ArrayList<GroupOfTask> arrayGroupOfTasks;
+    Map<User, ClassOfArrayLists> usersToDoList;
 
-    public Show(String commandIdentifier, String description, ArrayList<Task> arrayOfTasks, ArrayList<TaskList> arrayOfTaskLists, ArrayList<GroupOfTask> arrayGroupOfTasks) {
+    public Show(String commandIdentifier, String description, Map<User, ClassOfArrayLists> usersToDoList) {
         super(commandIdentifier, description);
-        this.arrayOfTasks = arrayOfTasks;
-        this.arrayOfTaskLists = arrayOfTaskLists;
-        this.arrayGroupOfTasks = arrayGroupOfTasks;
+        this.usersToDoList = usersToDoList;
     }
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
-
-        String finalString = "";
-        for (GroupOfTask currentGroup : arrayGroupOfTasks) {
-            finalString += currentGroup.getGroupNumber() + ". " + currentGroup.getNameGroup() + '\n';
-            for (TaskList currentTaskList : arrayOfTaskLists) {
-                if (currentGroup.getGroupNumber() == currentTaskList.getGroupNumber()) {
-                    finalString += '\t' + currentTaskList.getTaskListNumber() + ". " + currentTaskList.getNameTaskList() + '\n';
-                    for (Task currentTask : arrayOfTasks) {
-                        if (currentTaskList.getTaskListNumber() == currentTask.getListNumber()) {
-                            finalString += '\t' + '\t' + currentTask.getTaskNumber() + ". " + currentTask.getNameTask() + (currentTask.getIsReady() ? " - выполнено" : " - не выполнено")  + '\n';
-                        }
-                    }
-                }
-            }
+        if (!usersToDoList.containsKey(user)) {
+            usersToDoList.put(user, new ClassOfArrayLists());
         }
-        SendMessage sendMessage = new SendMessage(chat.getId(), finalString);
-        trySendMessage(absSender, sendMessage);
-    }
-
-    private void trySendMessage(AbsSender absSender, SendMessage sendMessage) {
-        try {
-            absSender.execute(sendMessage);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
+        ClassOfArrayLists classOfArrayLists = usersToDoList.get(user);
+        SendMessage sendMessage = new SendMessage(chat.getId(), classOfArrayLists.show());
+        ToDoBot.trySendMessage(absSender, user, sendMessage);
     }
 }

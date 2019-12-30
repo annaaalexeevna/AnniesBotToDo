@@ -6,35 +6,27 @@ import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 public class MarkReady extends BotCommand {
 
-    ArrayList<Task> arrayOfTasks;
-    ArrayList<TaskList> arrayOfTaskLists;
-    ArrayList<GroupOfTask> arrayGroupOfTasks;
-    private final Main main;
     private final SendMessage sendMessage;
+    Map<User, ClassOfArrayLists> usersToDoList;
 
-    public MarkReady(String commandIdentifier, String description, ArrayList<Task> arrayOfTasks, ArrayList<TaskList> arrayOfTaskLists, ArrayList<GroupOfTask> arrayGroupOfTasks, Main main) {
+    public MarkReady(String commandIdentifier, String description, Map<User, ClassOfArrayLists> usersToDoList) {
         super(commandIdentifier, description);
-        this.arrayOfTasks = arrayOfTasks;
-        this.arrayOfTaskLists = arrayOfTaskLists;
-        this.arrayGroupOfTasks = arrayGroupOfTasks;
-        this.main = main;
+        this.usersToDoList = usersToDoList;
         sendMessage = new SendMessage();
-
     }
-    //markready group list task
+
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
-        for (Task currentTask : arrayOfTasks) {
-            if (Integer.parseInt(arguments[1]) == currentTask.getGroupNumber() &&
-                    Integer.parseInt(arguments[2]) == currentTask.getListNumber() &&
-                    Integer.parseInt(arguments[3]) == currentTask.getTaskNumber()) {
-                currentTask.setIsReady(true);
-                sendMessage.setText("Вы выполнили задание! Поздравляю!");
-            }
+        if (!usersToDoList.containsKey(user)) {
+            usersToDoList.put(user, new ClassOfArrayLists());
         }
+        ClassOfArrayLists classOfArrayLists = usersToDoList.get(user);
+        classOfArrayLists.markReady(Integer.parseInt(arguments[1]), Integer.parseInt(arguments[2]), Integer.parseInt(arguments[3]));
+        sendMessage.setText("Вы выполнили задание! Поздравляю!");
+        ToDoBot.trySendMessage(absSender, user, sendMessage);
     }
 }

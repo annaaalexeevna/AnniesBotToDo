@@ -1,25 +1,22 @@
 package ru.spbgasu.annaaalexeevna;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TaskList {
-    private Integer taskListNumber;
+    private int taskListNumber;
     private String nameTaskList;
-    private Integer groupNumber;
+    private int groupNumber;
 
-    public TaskList(Integer groupNumber, Integer taskListNumber,  String nameTaskList) {
+    public TaskList(int groupNumber, int taskListNumber, String nameTaskList) {
+        this.groupNumber = groupNumber;
         this.taskListNumber = taskListNumber;
         this.nameTaskList = nameTaskList;
+    }
+
+    public void setGroupNumber(int groupNumber) {
+
         this.groupNumber = groupNumber;
     }
 
-    public void setGroupNumber(Integer groupNumber) {
-
-        this.groupNumber = groupNumber;
-    }
-
-    public void setTaskListNumber(Integer taskListNumber) {
+    public void setTaskListNumber(int taskListNumber) {
 
         this.taskListNumber = taskListNumber;
     }
@@ -29,11 +26,11 @@ public class TaskList {
         this.nameTaskList = nameTaskList;
     }
 
-    Integer getGroupNumber() {
+    int getGroupNumber() {
         return groupNumber;
     }
 
-    Integer getTaskListNumber() {
+    int getTaskListNumber() {
         return taskListNumber;
     }
 

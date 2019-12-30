@@ -5,33 +5,41 @@ import org.telegram.telegrambots.meta.api.objects.User;
 import java.util.Date;
 
 public class Task {
-    private Integer groupNumber;
-    private Integer listNumber;
-    private Integer taskNumber;
+    private int groupNumber;
+    private int listNumber;
+    private int taskNumber;
     private String nameTask;
     private String descriptionTask;
-    private User user;
     private Date dateOfEnd;
-    private Boolean isReady;
+    private boolean isReady;
 
 
-    public Task(Integer groupNumber, Integer listNumber, Integer taskNumber, String nameTask, String descriptionTask, User user, Date dateOfEnd, boolean isReady) {
+    public Task(int groupNumber, int listNumber, int taskNumber, String nameTask, String descriptionTask,
+                Date dateOfEnd, boolean isReady) {
+        this.groupNumber = groupNumber;
+        this.listNumber = listNumber;
         this.taskNumber = taskNumber;
         this.nameTask = nameTask;
         this.descriptionTask = descriptionTask;
-        this.user = user;
         this.dateOfEnd = dateOfEnd;
         this.isReady = isReady;
-        this.listNumber = listNumber;
+    }
+
+    public void setGroupNumber(int groupNumber) {
+
         this.groupNumber = groupNumber;
+    }
+
+    public void setListNumber(int listNumber) {
+        this.listNumber = listNumber;
+    }
+
+    public void setTaskNumber(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 
     public void setNameTask(String nameTask) {
         this.nameTask = nameTask;
-    }
-
-    public void setTaskNumber(Integer taskNumber) {
-        this.taskNumber = taskNumber;
     }
 
     public void setDescriptionTask(String descriptionTask) {
@@ -42,19 +50,19 @@ public class Task {
         this.dateOfEnd = dateOfEnd;
     }
 
-    public void setIsReady(Boolean isReady) {
+    public void setIsReady(boolean isReady) {
         this.isReady = isReady;
     }
 
-    Integer getGroupNumber() {
+    int getGroupNumber() {
         return groupNumber;
     }
 
-    Integer getListNumber() {
+    int getListNumber() {
         return listNumber;
     }
 
-    Integer getTaskNumber() {
+    int getTaskNumber() {
         return taskNumber;
     }
 
@@ -66,23 +74,12 @@ public class Task {
         return descriptionTask;
     }
 
-    User getUser() {
-        return user;
-    }
-
     Date getDateOfEnd() {
         return dateOfEnd;
     }
 
-    Boolean getIsReady() {
+    boolean getIsReady() {
         return isReady;
     }
 
-    public void setGroupNumber(Integer groupNumber) {
-        this.groupNumber = groupNumber;
-    }
-
-    public void setListNumber(Integer listNumber) {
-        this.listNumber = listNumber;
-    }
 }
