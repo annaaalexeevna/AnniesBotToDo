@@ -1,21 +1,25 @@
 package ru.spbgasu.annaaalexeevna;
 
 import org.telegram.telegrambots.extensions.bots.commandbot.commands.BotCommand;
+import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
+import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ClassOfArrayLists {
+
     List<Task> arrayOfTasks;
     List<TaskList> arrayOfTaskLists;
     List<GroupOfTask> arrayGroupOfTasks;
 
-    public ClassOfArrayLists(List<Task> arrayOfTasks, List<TaskList> arrayOfTaskLists, List<GroupOfTask> arrayGroupOfTasks) {
+    public ClassOfArrayLists() {
         this.arrayOfTasks = new ArrayList<Task>();
         this.arrayOfTaskLists = new ArrayList<TaskList>();
         this.arrayGroupOfTasks = new ArrayList<GroupOfTask>();
@@ -40,7 +44,6 @@ public class ClassOfArrayLists {
                     currentTask.getTaskNumber() == task) {
                 arrayOfTasks.remove(currentTask);
                 restoreNumberTask(currentTask.getTaskNumber(), arrayOfTasks.size(), arrayOfTasks);
-
             }
         }
     }

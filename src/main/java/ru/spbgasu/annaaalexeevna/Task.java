@@ -10,18 +10,17 @@ public class Task {
     private int taskNumber;
     private String nameTask;
     private String descriptionTask;
-    private User user;
     private Date dateOfEnd;
     private boolean isReady;
 
 
-    public Task(int groupNumber, int listNumber, int taskNumber, String nameTask, String descriptionTask, User user, Date dateOfEnd, boolean isReady) {
+    public Task(int groupNumber, int listNumber, int taskNumber, String nameTask, String descriptionTask,
+                Date dateOfEnd, boolean isReady) {
         this.groupNumber = groupNumber;
         this.listNumber = listNumber;
         this.taskNumber = taskNumber;
         this.nameTask = nameTask;
         this.descriptionTask = descriptionTask;
-        this.user = user;
         this.dateOfEnd = dateOfEnd;
         this.isReady = isReady;
     }
@@ -73,10 +72,6 @@ public class Task {
 
     String getDescriptionTask() {
         return descriptionTask;
-    }
-
-    User getUser() {
-        return user;
     }
 
     Date getDateOfEnd() {

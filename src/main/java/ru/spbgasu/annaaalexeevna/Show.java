@@ -7,30 +7,25 @@ import org.telegram.telegrambots.meta.api.objects.User;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+
 
 public class Show extends BotCommand {
 
-    ClassOfArrayLists classOfArrayLists;
+    Map<User, ClassOfArrayLists> usersToDoList;
 
-    public Show(String commandIdentifier, String description, ClassOfArrayLists classOfArrayLists) {
+    public Show(String commandIdentifier, String description, Map<User, ClassOfArrayLists> usersToDoList) {
         super(commandIdentifier, description);
-        this.classOfArrayLists = classOfArrayLists;
+        this.usersToDoList = usersToDoList;
     }
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
-
-        SendMessage sendMessage = new SendMessage(chat.getId(), classOfArrayLists.show());
-        trySendMessage(absSender, sendMessage);
-    }
-
-    private void trySendMessage(AbsSender absSender, SendMessage sendMessage) {
-        try {
-            absSender.execute(sendMessage);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
+        if (!usersToDoList.containsKey(user)) {
+            usersToDoList.put(user, new ClassOfArrayLists());
         }
+        ClassOfArrayLists classOfArrayLists = usersToDoList.get(user);
+        SendMessage sendMessage = new SendMessage(chat.getId(), classOfArrayLists.show());
+        ToDoBot.trySendMessage(absSender, user, sendMessage);
     }
 }
