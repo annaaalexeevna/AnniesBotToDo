@@ -12,19 +12,12 @@ import java.util.ArrayList;
 
 public class Add extends BotCommand {
 
-    private final Main main;
     private final SendMessage sendMessage;
+    ClassOfArrayLists classOfArrayLists;
 
-    ArrayList<Task> arrayOfTasks;
-    ArrayList<TaskList> arrayOfTaskLists;
-    ArrayList<GroupOfTask> arrayGroupOfTasks;
-
-    public Add(String commandIdentifier, String description, ArrayList<Task> arrayOfTasks, ArrayList<TaskList> arrayOfTaskLists, ArrayList<GroupOfTask> arrayGroupOfTasks, Main main) {
+    public Add(String commandIdentifier, String description, ClassOfArrayLists classOfArrayLists) {
         super(commandIdentifier, description);
-        this.arrayOfTasks = arrayOfTasks;
-        this.arrayOfTaskLists = arrayOfTaskLists;
-        this.arrayGroupOfTasks = arrayGroupOfTasks;
-        this.main = main;
+        this.classOfArrayLists = classOfArrayLists;
         sendMessage = new SendMessage();
     }
 
@@ -37,7 +30,7 @@ public class Add extends BotCommand {
                         Task newTask = new Task(Integer.parseInt(arguments[i + 1]), Integer.parseInt(arguments[i + 2]),
                                 Integer.parseInt(arguments[i + 3]), arguments[i + 4], arguments[i + 5], user,
                                 new SimpleDateFormat("dd/MM/yyyy").parse(arguments[i + 3]), false);
-                        arrayOfTasks.add(newTask);
+                        classOfArrayLists.addTask(newTask);
                         sendMessage.setText("Новое задание успешно создано!");
                     } catch (ParseException e) {
                         e.printStackTrace();
@@ -45,12 +38,12 @@ public class Add extends BotCommand {
                     break;
                 case "list":
                     TaskList newTaskList = new TaskList(Integer.parseInt(arguments[i + 1]), Integer.parseInt(arguments[i + 2]), arguments[i + 3] );
-                    arrayOfTaskLists.add(newTaskList);
+                    classOfArrayLists.addList(newTaskList);
                     sendMessage.setText("Новый лист успешно создан!");
                     break;
                 case "group":
                     GroupOfTask newGroupOfTask = new GroupOfTask(Integer.parseInt(arguments[i + 1]), arguments[i + 2]);
-                    arrayGroupOfTasks.add(newGroupOfTask);
+                    classOfArrayLists.addGroup(newGroupOfTask);
                     sendMessage.setText("Новая группа успешно создана!");
                     break;
             }

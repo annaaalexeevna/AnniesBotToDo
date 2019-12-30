@@ -12,35 +12,17 @@ import java.util.List;
 
 public class Show extends BotCommand {
 
-    ArrayList<Task> arrayOfTasks;
-    ArrayList<TaskList> arrayOfTaskLists;
-    ArrayList<GroupOfTask> arrayGroupOfTasks;
+    ClassOfArrayLists classOfArrayLists;
 
-    public Show(String commandIdentifier, String description, ArrayList<Task> arrayOfTasks, ArrayList<TaskList> arrayOfTaskLists, ArrayList<GroupOfTask> arrayGroupOfTasks) {
+    public Show(String commandIdentifier, String description, ClassOfArrayLists classOfArrayLists) {
         super(commandIdentifier, description);
-        this.arrayOfTasks = arrayOfTasks;
-        this.arrayOfTaskLists = arrayOfTaskLists;
-        this.arrayGroupOfTasks = arrayGroupOfTasks;
+        this.classOfArrayLists = classOfArrayLists;
     }
 
     @Override
     public void execute(AbsSender absSender, User user, Chat chat, String[] arguments) {
 
-        String finalString = "";
-        for (GroupOfTask currentGroup : arrayGroupOfTasks) {
-            finalString += currentGroup.getGroupNumber() + ". " + currentGroup.getNameGroup() + '\n';
-            for (TaskList currentTaskList : arrayOfTaskLists) {
-                if (currentGroup.getGroupNumber() == currentTaskList.getGroupNumber()) {
-                    finalString += '\t' + currentTaskList.getTaskListNumber() + ". " + currentTaskList.getNameTaskList() + '\n';
-                    for (Task currentTask : arrayOfTasks) {
-                        if (currentTaskList.getTaskListNumber() == currentTask.getListNumber()) {
-                            finalString += '\t' + '\t' + currentTask.getTaskNumber() + ". " + currentTask.getNameTask() + (currentTask.getIsReady() ? " - выполнено" : " - не выполнено")  + '\n';
-                        }
-                    }
-                }
-            }
-        }
-        SendMessage sendMessage = new SendMessage(chat.getId(), finalString);
+        SendMessage sendMessage = new SendMessage(chat.getId(), classOfArrayLists.show());
         trySendMessage(absSender, sendMessage);
     }
 

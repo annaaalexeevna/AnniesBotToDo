@@ -9,12 +9,10 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 public class Help extends BotCommand {
 
-    private final Main main;
     private final SendMessage sendMessage;
 
-    public Help(String commandIdentifier, String description, Main main) {
+    public Help(String commandIdentifier, String description) {
         super(commandIdentifier, description);
-        this.main = main;
         sendMessage = new SendMessage();
     }
 
@@ -26,11 +24,6 @@ public class Help extends BotCommand {
                 "в формате dd/MM/yyyy \n \t если list, то номер_группы, номер_списка, название_списка\n \t " +
                 "если group, то номер_группы, название_группы \n /show для демонстрации всего ToDo List \n" +
                 "/markready - чтобы отметить задание выполненным");
-        try {
-            main.execute(sendMessage);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
-        }
     }
 
 }

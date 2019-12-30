@@ -20,6 +20,7 @@ public class ToDoBot extends TelegramLongPollingCommandBot {
     List<TaskList> arrayOfTaskLists;
     List<GroupOfTask> arrayGroupOfTasks;
     ToDoBot toDoBot;
+    ClassOfArrayLists classOfArrayLists;
 
     public ToDoBot(DefaultBotOptions botOptions) {
         super(botOptions, BOT_USERNAME);
@@ -27,13 +28,14 @@ public class ToDoBot extends TelegramLongPollingCommandBot {
         this.arrayOfTaskLists = new ArrayList<TaskList>();
         this.arrayGroupOfTasks = new ArrayList<GroupOfTask>();
         this.toDoBot = new ToDoBot(botOptions);
+        this.classOfArrayLists = new ClassOfArrayLists(arrayOfTasks, arrayOfTaskLists, arrayGroupOfTasks);
 
-        register(new Add("New", "You can create new task/list/group", arrayOfTasks, arrayOfTaskLists, arrayGroupOfTasks, main));
-        register(new Edit("Edit", "You can edit task/list/group", arrayOfTasks, arrayOfTaskLists, arrayGroupOfTasks, main));
-        register(new Delete("Delete", "You can delete task/list/group", arrayOfTasks, arrayOfTaskLists, arrayGroupOfTasks, main));
-        register(new Show("Show", "You can show task/list/group", arrayOfTasks, arrayOfTaskLists, arrayGroupOfTasks));
-        register(new MarkReady("MarkReady", "You can mark ready task", arrayOfTasks, arrayOfTaskLists, arrayGroupOfTasks, main));
-        register(new Help("Help", "Help", main));
+        register(new Add("New", "You can create new task/list/group", classOfArrayLists));
+        register(new Edit("Edit", "You can edit task/list/group", classOfArrayLists));
+        register(new Delete("Delete", "You can delete task/list/group", classOfArrayLists));
+        register(new Show("Show", "You can show task/list/group", classOfArrayLists));
+        register(new MarkReady("MarkReady", "You can mark ready task", classOfArrayLists));
+        register(new Help("Help", "Help"));
     }
 
 
